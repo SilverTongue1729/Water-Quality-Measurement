@@ -1,0 +1,26 @@
+{
+  "channel": {
+    "id": 1904915,
+    "name": "ESW Project",
+    "description": "Channel for ESW Project",
+    "latitude": "0.0",
+    "longitude": "0.0",
+    "field1": "TDS",
+    "field2": "Temperature",
+    "field3": "Turbidity",
+    "field4": "pH",
+    "created_at": "2022-10-22T08:51:25Z",
+    "updated_at": "2022-10-22T09:13:18Z",
+    "last_entry_id": 358
+  },
+  "feeds": [
+    {
+      "created_at": "2022-11-02T17:55:34Z",
+      "entry_id": 358,
+      "field1": "0.00",
+      "field2": "25.12",
+      "field3": "50",
+      "field4": "7.77"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="refresh" content="15">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Quality</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+    function fetch_values () {
+      $('#error').text("fetching data");
+      $.ajax({
+        type: "GET",
+        url: 'https://api.thingspeak.com/channels/1904915/feeds.json?api_key=ZDPYT298KYQGB8QD&results=1',
+        data: {
+          format: 'json'
+        },
+        success: function (data) {
+          $('#error').text("data fetched");
+          $('#field1').text(data.feeds[0].field1);
+          $('#field2').text(data.feeds[0].field2);
+          $('#field3').text(data.feeds[0].field3);
+          $('#field4').text(data.feeds[0].field4);
+
+        },
+        error: function () {
+          $('#error').text("There was an error in fetching values.");
+        },
+        complete: function () {
+          setTimeout(fetch_values, 15000);
+        }
+      });
+    }
+
+    $(document).ready(function () {
+      fetch_values();
+    });
+
+  </script>
+</head>
+
+<body>
+  <h1>Water Quality</h1>
+
+  <div class="result">
+    <p>TDS: <span id="field1"></span></p>
+    <p>Temperature: <span id="field2"></span></p>
+    <p>Turbidity: <span id="field3"></span></p>
+    <p>pH: <span id="field4"></span></p>
+    <p id="error"></p>
+  </div>
+
+</body>
+
+</html>
