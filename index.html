@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="refresh" content="15">
+  <meta http-equiv="refresh" content="120">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Water Quality</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -24,6 +24,7 @@
           $('#field2').text(data.feeds[0].field2);
           $('#field3').text(data.feeds[0].field3);
           $('#field4').text(data.feeds[0].field4);
+          check_values();
 
         },
         error: function () {
@@ -33,6 +34,26 @@
           setTimeout(fetch_values, 15000);
         }
       });
+    }
+
+    function check_values() {
+      var field1 = parseFloat($('#field1').text());
+      var field2 = parseFloat($('#field2').text());
+      var field3 = parseFloat($('#field3').text());
+      var field4 = parseFloat($('#field4').text());
+
+      if (field1 > 500) {
+        $('#field1').css('color', 'red');
+      }
+      if (field2 > 25) {
+        $('#field2').css('color', 'red');
+      }
+      if (field3 > 5) {
+        $('#field3').css('color', 'red');
+      }
+      if (field4 < 6.5 || field4 > 8.5) {
+        $('#field4').css('color', 'red');
+      }
     }
 
     $(document).ready(function () {
@@ -51,6 +72,31 @@
     <p>Turbidity: <span id="field3"></span></p>
     <p>pH: <span id="field4"></span></p>
     <p id="error"></p>
+  </div>
+
+  <div>
+    <table>
+      <tr>
+        <td colspan="2">
+          <h1>Data Collection Dashboard</h1>
+        </td>
+      </tr>
+      <tr>
+        <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1904915/charts/1?api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=TDS&type=line"></iframe>
+        </td>
+        <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1904915/charts/2?api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temperature&type=line"></iframe>
+        </td>
+      </tr>
+      <tr>
+        <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1904915/charts/3?api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Turbidity&type=line"></iframe>
+        </td>
+        <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
+            src="https://thingspeak.com/channels/1904915/charts/4?api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=pH&type=line"></iframe>
+        </td>
+    </table>
   </div>
 
 </body>
