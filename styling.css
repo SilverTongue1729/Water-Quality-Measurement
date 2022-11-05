@@ -1,0 +1,31 @@
+
+.Title{
+    text-align:center;
+    font-family: 'Orbitron', sans-serif;
+}
+.result{
+    font-family:'Poppins',sans-serif;
+    font-size: large;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+.resultChild{
+    display: block;
+    width: 100%;
+}
+#error{
+    text-align: center;
+    font-family:'Oswald',sans-serif;
+    font-size: larger;
+}
+#GraphTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+body{
+    background: rgb(63,184,251);
+    background: radial-gradient(circle, rgba(63,184,251,1) 0%, rgba(70,252,232,1) 100%);
+}

@@ -6,12 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="refresh" content="120">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Water Quality</title>
+  <title>Water Quality Dashboard</title>
+  
+  <!--Styling/CSS stuff-->
+  
+  <link rel="stylesheet" href = "styling.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+
+  <!--Done-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script>
     function fetch_values () {
-      $('#error').text("fetching data");
+      $('#error').text("Data is being fetched.");
       $.ajax({
         type: "GET",
         url: 'https://api.thingspeak.com/channels/1904915/feeds.json?api_key=ZDPYT298KYQGB8QD&results=1',
@@ -19,7 +28,7 @@
           format: 'json'
         },
         success: function (data) {
-          $('#error').text("data fetched");
+          $('#error').text("Data has been fetched.");
           $('#field1').text(data.feeds[0].field1);
           $('#field2').text(data.feeds[0].field2);
           $('#field3').text(data.feeds[0].field3);
@@ -64,37 +73,36 @@
 </head>
 
 <body>
-  <h1>Water Quality</h1>
+  <h1 class = "Title">Water Quality</h1>
 
   <div class="result">
-    <p>TDS: <span id="field1"></span></p>
-    <p>Temperature: <span id="field2"></span></p>
-    <p>Turbidity: <span id="field3"></span></p>
-    <p>pH: <span id="field4"></span></p>
-    <p id="error"></p>
+    <p class="resultChild">TDS: <span id="field1"></span></p>
+    <p class="resultChild">Temperature: <span id="field2"></span></p>
+    <p class="resultChild">Turbidity: <span id="field3"></span></p>
+    <p class="resultChild">pH: <span id="field4"></span></p>
   </div>
-
+  <p id="error"></p>
   <div>
-    <table>
+    <table id="GraphTable">
       <tr>
         <td colspan="2">
-          <h1>Data Collection Dashboard</h1>
+          <h1 class = "Title" >Data</h1>
         </td>
       </tr>
       <tr>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/1?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=TDS&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/1?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=TDS&type=line"></iframe>
         </td>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/2?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temperature&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/2?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=Temperature&type=line"></iframe>
         </td>
       </tr>
       <tr>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/3?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Turbidity&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/3?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=Turbidity&type=line"></iframe>
         </td>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/4?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=pH&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/4?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=pH&type=line"></iframe>
         </td>
     </table>
   </div>
