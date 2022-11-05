@@ -7,11 +7,11 @@
   <meta http-equiv="refresh" content="120">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Water Quality Dashboard</title>
-  
+
   <!--Styling/CSS stuff-->
-  
-  <link rel="stylesheet" href = "styling.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&display=swap" rel="stylesheet"> 
+
+  <link rel="stylesheet" href="styling.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
 
@@ -45,7 +45,7 @@
       });
     }
 
-    function check_values() {
+    function check_values () {
       var field1 = parseFloat($('#field1').text());
       var field2 = parseFloat($('#field2').text());
       var field3 = parseFloat($('#field3').text());
@@ -54,33 +54,28 @@
       if (field1 > 500) {
         $('#field1').css('color', 'red');
       }
-      else{
+      else {
         $('#field1').css('color', 'black');
       }
       if (field2 > 25) {
         $('#field2').css('color', 'red');
       }
-      else{
+      else {
         $('#field2').css('color', 'black');
       }
       if (field3 > 5) {
         $('#field3').css('color', 'red');
       }
-      else{
+      else {
         $('#field3').css('color', 'black');
       }
       if (field4 < 6.5 || field4 > 8.5) {
         $('#field4').css('color', 'red');
       }
-      else{
+      else {
         $('#field4').css('color', 'black');
       }
     }
-
-    // $('a#someID').attr({
-    //     target: 'download_data',
-    //     href: 'https://api.thingspeak.com/channels/1904915/feeds.csv?api_key=ZDPYT298KYQGB8QD&timezone=Asia%2FKolkata'
-    //   });
 
     $(document).ready(function () {
       fetch_values();
@@ -90,7 +85,7 @@
 </head>
 
 <body>
-  <h1 class = "Title">Water Quality</h1>
+  <h1 class="Title">Water Quality</h1>
 
   <div class="result">
     <p class="resultChild">TDS: <span id="field1"></span></p>
@@ -103,7 +98,7 @@
     <table id="GraphTable">
       <tr>
         <td colspan="2">
-          <h1 class = "Title" >Data</h1>
+          <h1 class="Title">Data</h1>
         </td>
       </tr>
       <tr>
@@ -124,15 +119,50 @@
     </table>
   </div>
 
+  <input type="datetime-local" id="start_time">
+  <input type="datetime-local" id="end_time"><br>
   <div>
     <a id='download' href="no-script.html">Download Data</a>
   </div>
 
+  <div>
+    <p>Start Time: <span id="start_time_val"></span></p>
+    <p>End Time: <span id="end_time_val"></span></p>
+  </div>
+
+
   <script>
     $('a#download').click(function (e) {
-        e.preventDefault();  //stop the browser from following
-        window.location.href = 'https://api.thingspeak.com/channels/1904915/feeds.csv?api_key=ZDPYT298KYQGB8QD&timezone=Asia%2FKolkata';
-      });
+      e.preventDefault();  //stop the browser from following
+
+      var start_time = $('#start_time').val();
+      var end_time = $('#end_time').val();
+
+      if (start_time === ""){
+        start_time = "2022-10-22T08:51";
+      }
+      if (end_time === ""){
+        end_time = (new Date()).toISOString().slice(0, 16);
+      }
+
+      var start_date = new Date(start_time);
+      var end_date = new Date(end_time);
+
+      $('#start_time_val').text(start_date);
+      $('#end_time_val').text(end_date);
+
+      if (start_date > end_date){
+        alert("Start date cannot be after end date");
+        return;
+      }
+    
+      start_time = start_time.replace('T', '%20');
+      end_time = end_time.replace('T', '%20');
+      start_time = start_time + ':00';
+      end_time = end_time + ':00';
+
+      window.location.href = 'https://api.thingspeak.com/channels/1904915/feeds.csv?api_key=ZDPYT298KYQGB8QD&timezone=Asia%2FKolkata&start=' + start_time + '&end=' + end_time;
+    });
   </script>
 
 </body>
