@@ -65,6 +65,11 @@
       }
     }
 
+    // $('a#someID').attr({
+    //     target: 'download_data',
+    //     href: 'https://api.thingspeak.com/channels/1904915/feeds.csv?api_key=ZDPYT298KYQGB8QD&timezone=Asia%2FKolkata'
+    //   });
+
     $(document).ready(function () {
       fetch_values();
     });
@@ -91,24 +96,33 @@
       </tr>
       <tr>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/1?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=TDS&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/1?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=TDS&type=line"></iframe>
         </td>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/2?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=Temperature&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/2?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temperature&type=line"></iframe>
         </td>
       </tr>
       <tr>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/3?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=Turbidity&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/3?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Turbidity&type=line"></iframe>
         </td>
         <td><iframe width="450" height="260" style="border: 1px solid #cccccc;"
-            src="https://thingspeak.com/channels/1904915/charts/4?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23000000&color=%23d62020&dynamic=true&results=60&title=pH&type=line"></iframe>
+            src="https://thingspeak.com/channels/1904915/charts/4?dynamic=true&api_key=ZDPYT298KYQGB8QD&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=pH&type=line"></iframe>
         </td>
     </table>
   </div>
 
+  <div>
+    <a id='download' href="no-script.html">Download Data</a>
+  </div>
+
+  <script>
+    $('a#download').click(function (e) {
+        e.preventDefault();  //stop the browser from following
+        window.location.href = 'https://api.thingspeak.com/channels/1904915/feeds.csv?api_key=ZDPYT298KYQGB8QD&timezone=Asia%2FKolkata';
+      });
+  </script>
+
 </body>
 
 </html>
-
-<!-- timezone=Asia%2FKolkata -->
