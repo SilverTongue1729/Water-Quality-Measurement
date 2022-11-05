@@ -122,17 +122,24 @@
   <input type="datetime-local" id="start_time">
   <input type="datetime-local" id="end_time"><br>
   <div>
-    <a id='download' href="no-script.html">Download Data</a>
+    <a id='downButton' href="no-script.html">Download Data</a>
   </div>
 
-  <div>
+  <div id = "downDeets">
     <p>Start Time: <span id="start_time_val"></span></p>
     <p>End Time: <span id="end_time_val"></span></p>
   </div>
+  <script>
+    const downDeets = document.getElementById("downDeets");
+    const downButton = document.getElementById("downButton");
+    downButton.onclick = function(){
+      downDeets.style.display = "block";
+    }
+  </script>
 
 
   <script>
-    $('a#download').click(function (e) {
+    $('a#downButton').click(function (e) {
       e.preventDefault();  //stop the browser from following
 
       var start_time = $('#start_time').val();

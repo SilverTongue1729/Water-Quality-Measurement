@@ -29,7 +29,7 @@ body{
     background: rgb(63,184,251);
     background: radial-gradient(circle, rgba(63,184,251,1) 0%, rgba(70,252,232,1) 100%);
 }
-#download{
+#downButton{
     font-family: 'Orbitron', sans-serif;  
     border: none;
         color: white;
@@ -42,4 +42,7 @@ body{
         transition-duration: 0.4s;
         cursor: pointer;
         border-radius: 25px;
+}
+#downDeets{
+    display: none;
 }
