@@ -23,7 +23,7 @@
       $('#error').text("Data is being fetched.");
       $.ajax({
         type: "GET",
-        url: 'https://api.thingspeak.com/channels/1904915/feeds.json?api_key=ZDPYT298KYQGB8QD&results=1',
+        url: 'https://api.thingspeak.com/channels/1904915/feeds.json?api_key=ZDPYT298KYQGB8QD&results=1&timezone=Asia%2FKolkata',
         data: {
           format: 'json'
         },
@@ -110,3 +110,5 @@
 </body>
 
 </html>
+
+<!-- timezone=Asia%2FKolkata -->
