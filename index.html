@@ -174,25 +174,17 @@
     }
   </script>
   <div id = "Subscribe">
-    <form action="/submitform" method = "post">
-      <p id = "subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking water:<span> 
-        <input type="text" class = "downInp" placeholder = "John Doe" id="name"><input type="email" class = "downInp" placeholder="example@gmail.com" id="emaill"></span></p>
-        <input id = 'subButton' type="submit" value = "Subscribe" name="Subscribe">
+    <form action="/add" method="POST">
+        <p id = "subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking water:<span> 
+          <input type="text" class = "downInp" placeholder = "John Doe" id="name" required><input type="email" class = "downInp" placeholder="example@gmail.com" id="emaill" required></span></p>  
+          <button id = 'subButton' type="submit" value = "Subscribe" name="Subscribe">Submit</button>
     </form>
-    
 
 
   </div>
 </body>
 
 </html>
+
 <?php
               
-if(isset($_POST['textdata']))
-{
-$data=$_POST['textdata'];
-$fp = fopen('data.txt', 'a');
-fwrite($fp, $data);
-fclose($fp);
-}
-?>
