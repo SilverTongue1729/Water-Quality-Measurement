@@ -19,42 +19,42 @@ const limiter = rateLimit({
 var db = new sqlite3.Database('./database/subscribers.db');
 
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname,'./public')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, './public')));
 app.use(helmet());
 app.use(limiter);
 db.run('CREATE TABLE IF NOT EXISTS emp(email TEXT, name TEXT)');
-app.get('/', function(req,res){
-    res.sendFile(path.join(__dirname,'./public/form.html'));
-  });
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 
 // Insert
-app.post('/add', function(req,res){
-    db.serialize(()=>{
-      db.run('INSERT INTO emp(email,name) VALUES(?,?)', [req.body.id, req.body.name], function(err) {
-        if (err) {
-          return console.log(err.message);
-        }
-        console.log("New subscriber has been added");
-      //  res.send("New subscriber has been added into the database with ID = "+req.body.id+ " and Name = "+req.body.name);
-      });
-  });
-  });
-
-//Closing connection, we need to fix, rn user needs to go to http://localhost:3000/close
-  app.get('/close', function(req,res){
-    db.close((err) => {
+app.post('/add', function (req, res) {
+  db.serialize(() => {
+    db.run('INSERT INTO emp(email,name) VALUES(?,?)', [req.body.id, req.body.name], function (err) {
       if (err) {
-        res.send('There is some error in closing the database');
-        return console.error(err.message);
+        return console.log(err.message);
       }
-      console.log('Closing the database connection.');
-      res.send('Database connection successfully closed');
+      console.log("New subscriber has been added");
+      //  res.send("New subscriber has been added into the database with ID = "+req.body.id+ " and Name = "+req.body.name);
     });
   });
+});
+
+//Closing connection, we need to fix, rn user needs to go to http://localhost:3000/close
+app.get('/close', function (req, res) {
+  db.close((err) => {
+    if (err) {
+      res.send('There is some error in closing the database');
+      return console.error(err.message);
+    }
+    console.log('Closing the database connection.');
+    res.send('Database connection successfully closed');
+  });
+});
 
 
-server.listen(3000,function(){ 
-    console.log("Server listening on port: 3000");
+server.listen(3000, function () {
+  console.log("Server listening on port: 3000");
 });
