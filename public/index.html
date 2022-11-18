@@ -11,7 +11,7 @@
   <!--Styling/CSS stuff-->
 
   <link rel="stylesheet" href="styling.css">
-  <link rel="icon" type="image/x-icon" href="images/favicon_01.png">
+  <link rel="icon" type="image/x-icon" href="media/favicon_01.png">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
@@ -119,49 +119,49 @@
         </td>
     </table>
   </div>
-  <div id = "downloads"> 
+  <div id="downloads">
 
-    <input type="datetime-local" class = "downInp" id="start_time">
-    <input type="datetime-local" class = "downInp" id="end_time"><br>
+    <input type="datetime-local" class="downInp" id="start_time">
+    <input type="datetime-local" class="downInp" id="end_time"><br>
     <div>
       <a id='downButton' href="no-script.html">Download Data</a>
     </div>
-  
+
     <script>
       $('a#downButton').click(function (e) {
         e.preventDefault();  //stop the browser from following
-  
+
         var start_time = $('#start_time').val();
         var end_time = $('#end_time').val();
-  
-        if (start_time === ""){
+
+        if (start_time === "") {
           start_time = "2022-10-22T08:51";
         }
-        if (end_time === ""){
+        if (end_time === "") {
           end_time = (new Date()).toISOString().slice(0, 16);
         }
-  
+
         var start_date = new Date(start_time);
         var end_date = new Date(end_time);
-  
+
         $('#start_time_val').text(start_date);
         $('#end_time_val').text(end_date);
-  
-        if (start_date > end_date){
+
+        if (start_date > end_date) {
           alert("Start date cannot be after end date");
           return;
         }
-      
+
         start_time = start_time.replace('T', '%20');
         end_time = end_time.replace('T', '%20');
         start_time = start_time + ':00';
         end_time = end_time + ':00';
-  
+
         window.location.href = 'https://api.thingspeak.com/channels/1904915/feeds.csv?api_key=ZDPYT298KYQGB8QD&timezone=Asia%2FKolkata&start=' + start_time + '&end=' + end_time;
       });
     </script>
   </div>
-  <div id = "downDeets">
+  <div id="downDeets">
     <p>Start Time: <span id="start_time_val"></span></p>
     <p>End Time: <span id="end_time_val"></span></p>
   </div>
@@ -170,15 +170,17 @@
     document.getElementById('start_time').value = (new Date()).toISOString().slice(0, 16);
     document.getElementById('end_time').value = (new Date()).toISOString().slice(0, 16);
     const downButton = document.getElementById("downButton");
-    downButton.onclick = function(){
+    downButton.onclick = function () {
       downDeets.style.display = "block";
     }
   </script>
-  <div id = "Subscribe">
+  <div id="Subscribe">
     <form action="/add" method="POST">
-        <p id = "subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking water:<span> 
-          <input type="text" class = "downInp" placeholder = "John Doe" id="name" required><input type="email" class = "downInp" placeholder="example@gmail.com" id="emaill" required></span></p>  
-          <button id = 'subButton' type="submit" value = "Subscribe" name="Subscribe">Submit</button>
+      <p id="subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking
+        water:<span>
+          <input type="text" class="downInp" placeholder="John Doe" id="name" required><input type="email"
+            class="downInp" placeholder="example@gmail.com" id="emaill" required></span></p>
+      <button id='subButton' type="submit" value="Subscribe" name="Subscribe">Submit</button>
     </form>
 
 
@@ -186,6 +188,4 @@
 </body>
 
 </html>
-
-<?php
               
