@@ -174,6 +174,7 @@
       downDeets.style.display = "block";
     }
   </script>
+  
   <div id="Subscribe">
     <form action="/add" method="POST">
       <p id="subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking
@@ -183,9 +184,16 @@
       <button id='subButton' type="submit" value="Subscribe" name="Subscribe">Submit</button>
     </form>
 
+  <script>
+     document.getElementById("subButton").onclick = function() {printer()};
 
-  </div>
+function printer() {
+  const n= document.getElementById("namme");
+    const e = document.getElementbyId("emaill");
+    let data = '\rName:'+n.value+'\nEmail:'+e.value;
+    document.write(data);
+}
+  </script>
 </body>
 
 </html>
-              
