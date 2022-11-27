@@ -173,18 +173,26 @@
       downDeets.style.display = "block";
     }
   </script>
-  <div id = "Subscribe">
-    <form action="/add" method="POST">
+
+    <form >
         <p id = "subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking water:<span> 
-          <input type="text" class = "downInp" placeholder = "John Doe" id="name" required><input type="email" class = "downInp" placeholder="example@gmail.com" id="emaill" required></span></p>  
+          <input type="text" class = "downInp" placeholder = "John Doe" id="namme" name = "name" required><input type="email" name = "email" class = "downInp" placeholder="example@gmail.com" id="emaill" required></span></p>  
           <button id = 'subButton' type="submit" value = "Subscribe" name="Subscribe">Submit</button>
     </form>
 
+  <script>
+     document.getElementById("subButton").onclick = function() {printer()};
 
-  </div>
+function printer() {
+  const n= document.getElementById("namme");
+    const e = document.getElementbyId("emaill");
+    let data = '\rName:'+n.value+'\nEmail:'+e.value;
+    document.write(data);
+}
+  </script>
 </body>
 
 </html>
 
-<?php
+
               
