@@ -11,9 +11,9 @@ async function sendMailToUser(emailId,content)
   secure: true,
   });
   const mailData = {
-    from: ' strawberry.kiwimoment@gmail.com',  // sender address
+    from: 'strawberry.kiwimoment@gmail.com',  // sender address
       to: emailId,      // list of receivers
-      subject: "password generated",
+      subject: "Water Quality Alert",   // Subject line
       text: content
     };
     transporter.sendMail(mailData, function (err, info) {

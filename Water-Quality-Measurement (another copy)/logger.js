@@ -5,7 +5,6 @@ var last_entry_id = 0;
 
 var log_vals = async function () {
   axios.get('https://api.thingspeak.com/channels/1904915/feeds.json?api_key=ZDPYT298KYQGB8QD&results=1&timezone=Asia%2FKolkata')
-
     .then(res => {
       var fields = res.data.feeds[0];
       if (last_entry_id == fields.entry_id) {

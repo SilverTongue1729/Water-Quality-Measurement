@@ -19,14 +19,17 @@
   },
   "homepage": "https://github.com/SilverTongue1729/Water-Quality-Measurement#readme",
   "dependencies": {
+    "@emailjs/browser": "^3.10.0",
     "axios": "^1.2.0",
     "body-parser": "^1.20.1",
+    "emailjs": "^4.0.1",
     "express": "^4.18.2",
     "express-rate-limit": "^6.6.0",
     "fs": "^0.0.1-security",
     "helmet": "^6.0.0",
     "nodemailer": "^6.8.0",
     "request": "^2.88.2",
+    "smtp-client": "^0.4.0",
     "sqlite3": "^5.1.2"
   },
   "devDependencies": {
