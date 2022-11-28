@@ -54,7 +54,6 @@
 
       if (field1 > 500) {
         $('#field1').css('color', 'red');
-        //call js func here
       }
       else {
         $('#field1').css('color', 'black');
@@ -83,6 +82,13 @@
       fetch_values();
     });
 
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init("yA8iLWs9wHIzVwD4e");
+    })();
   </script>
 </head>
 
@@ -120,49 +126,49 @@
         </td>
     </table>
   </div>
-  <div id = "downloads"> 
+  <div id="downloads">
 
-    <input type="datetime-local" class = "downInp" id="start_time">
-    <input type="datetime-local" class = "downInp" id="end_time"><br>
+    <input type="datetime-local" class="downInp" id="start_time">
+    <input type="datetime-local" class="downInp" id="end_time"><br>
     <div>
       <a id='downButton' href="no-script.html">Download Data</a>
     </div>
-  
+
     <script>
       $('a#downButton').click(function (e) {
         e.preventDefault();  //stop the browser from following
-  
+
         var start_time = $('#start_time').val();
         var end_time = $('#end_time').val();
-  
-        if (start_time === ""){
+
+        if (start_time === "") {
           start_time = "2022-10-22T08:51";
         }
-        if (end_time === ""){
+        if (end_time === "") {
           end_time = (new Date()).toISOString().slice(0, 16);
         }
-  
+
         var start_date = new Date(start_time);
         var end_date = new Date(end_time);
-  
+
         $('#start_time_val').text(start_date);
         $('#end_time_val').text(end_date);
-  
-        if (start_date > end_date){
+
+        if (start_date > end_date) {
           alert("Start date cannot be after end date");
           return;
         }
-      
+
         start_time = start_time.replace('T', '%20');
         end_time = end_time.replace('T', '%20');
         start_time = start_time + ':00';
         end_time = end_time + ':00';
-  
+
         window.location.href = 'https://api.thingspeak.com/channels/1904915/feeds.csv?api_key=ZDPYT298KYQGB8QD&timezone=Asia%2FKolkata&start=' + start_time + '&end=' + end_time;
       });
     </script>
   </div>
-  <div id = "downDeets">
+  <div id="downDeets">
     <p>Start Time: <span id="start_time_val"></span></p>
     <p>End Time: <span id="end_time_val"></span></p>
   </div>
@@ -171,27 +177,21 @@
     document.getElementById('start_time').value = (new Date()).toISOString().slice(0, 16);
     document.getElementById('end_time').value = (new Date()).toISOString().slice(0, 16);
     const downButton = document.getElementById("downButton");
-    downButton.onclick = function(){
+    downButton.onclick = function () {
       downDeets.style.display = "block";
     }
   </script>
-
+  <div id="Subscribe">
     <form action="/add" method="POST">
-        <p id = "subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking water:<span> 
-          <input type="text" class = "downInp" placeholder = "John Doe" id="namme" name = "name" required><input type="email" name = "email" class = "downInp" placeholder="example@gmail.com" id="emaill" required></span></p>  
-          <button id = 'subButton' type="submit" value = "Subscribe" name="Subscribe" onsubmit="e.preventDefault()">Submit</button>
+      <p id="subText">Please enter your name and email to recieve alerts if any values aren't permissible for drinking
+        water:<span>
+          <input type="text" class="downInp" placeholder="John Doe" id="name" name="name" required><input type="email"
+            class="downInp" placeholder="example@gmail.com" id="emaill" name="email" required></span></p>
+      <button id='subButton' type="submit" value="Subscribe" name="Subscribe" onclick="">Submit</button>
     </form>
 
-  <script>
-     document.getElementById("subButton").onclick = function() {printer()};
 
-function printer() {
-  const n= document.getElementById("namme");
-    const e = document.getElementbyId("emaill");
-    let data = '\rName:'+n.value+'\nEmail:'+e.value;
-    document.write(data);
-}
-  </script>
+  </div>
 </body>
 
 </html>

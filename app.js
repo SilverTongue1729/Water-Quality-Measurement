@@ -1,60 +1,62 @@
-var sqlite3 = require('sqlite3').verbose();
-var express = require('express');
 var http = require('http');
-var path = require("path");
+var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
-var rateLimit = require("express-rate-limit");
+var rateLimit = require('express-rate-limit');
+const axios = require('axios');
+const fs = require("fs");
 
+var log_values = require('./logger.js');
+
+var email = "";
 
 var app = express();
-var server = http.createServer(app);
+const port = process.env.PORT || 5000;
+// const server = http.createServer(app);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100 // limit each IP to 100 requests per windowMs
 });
 
-
-var db = new sqlite3.Database('./database/subscribers.db');
-
-
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, './public')));
 app.use(helmet());
 app.use(limiter);
-db.run('CREATE TABLE IF NOT EXISTS emp(email TEXT, name TEXT)');
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, './public/index.html'));
+
+app.listen(port, (err) => {
+  if (err) console.log(err);
+  console.log(`Server listening on port ${port}`);
 });
 
+log_values.log_vals();
+console.log("logger started");
 
-// Insert
-app.post('/add', function (req, res) {
-  db.serialize(() => {
-    db.run('INSERT INTO emp(email,name) VALUES(?,?)', [req.body.id, req.body.name], function (err) {
-      if (err) {
-        return console.log(err.message);
-      }
-      console.log("New subscriber has been added");
-      //  res.send("New subscriber has been added into the database with ID = "+req.body.id+ " and Name = "+req.body.name);
+app.get("/", (err, req, res,) => {
+  res.sendFile('index.html');
+  if (err) {
+    console.log(err);
+    res.sendFile('error.html');
+  }
+});
+
+// app post request
+app.post('/add', (req, res) => {
+  console.log(req.body.name, req.body.email);
+  fs.readFile('emails.json', (err, data) => {
+    var json = JSON.parse(data);
+    let new_data = {
+      "name": req.body.name,
+      "email": req.body.email
+    }
+    console.log(new_data);
+    json.emails.push(new_data);
+    fs.writeFile("emails.json", JSON.stringify(json), (err) => {
+      if (err) throw err;
+      console.log('email was added to emails.json');
     });
   });
-});
-
-//Closing connection, we need to fix, rn user needs to go to http://localhost:3000/close
-app.get('/close', function (req, res) {
-  db.close((err) => {
-    if (err) {
-      res.send('There is some error in closing the database');
-      return console.error(err.message);
-    }
-    console.log('Closing the database connection.');
-    res.send('Database connection successfully closed');
-  });
-});
-
-
-server.listen(3000, function () {
-  console.log("Server listening on port: 3000");
+  res.redirect('http://127.0.0.1:5000/');
 });
