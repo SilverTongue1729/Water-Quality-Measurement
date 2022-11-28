@@ -15,14 +15,14 @@ var log_vals = async function () {
       if (fields.field1 > 500 || fields.field2 > 30 || fields.field3 > 5 || fields.field4 < 6.5 || fields.field4 > 8.5) {
         console.log("Not safe");
         fs.readFile('log.json', (err, data) => {
-          var log_json = JSON.parse(data);
+          var json = JSON.parse(data);
           console.log(fields);
-          log_json.data.push(fields);
-          fs.writeFile("log.json", JSON.stringify(log_json), (err) => {
+          json.data.push(fields);
+          fs.writeFile("log.json", JSON.stringify(json), (err) => {
             if (err) throw err;
             console.log('data was appended to log.json');
           });
-        })
+        });
       }
     })
     .catch(err => console.log(err))

@@ -4,6 +4,9 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
 var rateLimit = require('express-rate-limit');
+const axios = require('axios');
+const fs = require("fs");
+
 var log_values = require('./logger.js');
 
 var email = "";
@@ -42,6 +45,18 @@ app.get("/", (err, req, res,) => {
 // app post request
 app.post('/add', (req, res) => {
   console.log(req.body.name, req.body.email);
-  email = req.body.email;
+  fs.readFile('emails.json', (err, data) => {
+    var json = JSON.parse(data);
+    let new_data = {
+      "name": req.body.name,
+      "email": req.body.email
+    }
+    console.log(new_data);
+    json.emails.push(new_data);
+    fs.writeFile("emails.json", JSON.stringify(json), (err) => {
+      if (err) throw err;
+      console.log('email was added to emails.json');
+    });
+  });
   res.redirect('http://127.0.0.1:5000/');
 });
