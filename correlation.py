@@ -30,5 +30,7 @@ data = pd.DataFrame({
 print(data)
 
 print("correlation temp and tds: ",data['temp'].corr(data['tds']))
+print("correlation temp and ph: ",data['temp'].corr(data['ph']))
+print("correlation temp and turbidity: ",data['temp'].corr(data['turbidity']))
 print(data.describe())
 
