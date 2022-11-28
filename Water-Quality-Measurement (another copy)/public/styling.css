@@ -47,12 +47,7 @@ body{
         border-radius: 25px;
         margin-left: 10px;
 }
-#subButton:hover{
-    background-color:#eb0e26;
-}
-#downButton:hover{
-    background-color:#eb0e26;
-}
+
 #subButton{
     font-family: 'Orbitron', sans-serif;  
     
