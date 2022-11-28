@@ -4,9 +4,12 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
 var rateLimit = require('express-rate-limit');
+var log_values = require('./logger.js');
+
+var email = "";
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 // const server = http.createServer(app);
 
 const limiter = rateLimit({
@@ -25,6 +28,9 @@ app.listen(port, (err) => {
   console.log(`Server listening on port ${port}`);
 });
 
+log_values.log_vals();
+console.log("logger started");
+
 app.get("/", (err, req, res,) => {
   res.sendFile('index.html');
   if (err) {
@@ -34,7 +40,8 @@ app.get("/", (err, req, res,) => {
 });
 
 // app post request
-app.post('/subscribe', (req, res) => {
-  console.log(req.body);
-  res.send('success');
+app.post('/add', (req, res) => {
+  console.log(req.body.name, req.body.email);
+  email = req.body.email;
+  res.redirect('http://127.0.0.1:5000/');
 });

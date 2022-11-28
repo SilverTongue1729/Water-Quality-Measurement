@@ -4,7 +4,8 @@
   "description": "Server to store name and emails,  to send  email alerts",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app2.js check.js",
+    "start2": "node app2.js check.js",
     "dev": "nodemon app.js"
   },
   "repository": {
@@ -18,9 +19,11 @@
   },
   "homepage": "https://github.com/SilverTongue1729/Water-Quality-Measurement#readme",
   "dependencies": {
+    "axios": "^1.2.0",
     "body-parser": "^1.20.1",
     "express": "^4.18.2",
     "express-rate-limit": "^6.6.0",
+    "fs": "^0.0.1-security",
     "helmet": "^6.0.0",
     "nodemailer": "^6.8.0",
     "request": "^2.88.2",
